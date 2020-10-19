@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APP: Rest_Api_completa</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+
+<div id="principal">
+
+    <nav class="light-blue darken-4">
+        <div class="container ">
+            <div class="nav-wrapper">
+             <a href="#!" class="brand-logo ">EJERCICIO REST_API_COMPLETO</a>
+             <ul class="right hide-on-med-and-down">
+                <form>
+                    <div class="input-field">
+                     <input v-model="facturas_busqueda" id="search" type="search" required placeholder="Busqueda por id_factura" v-on:keyup.enter="buscarFacturas()">
+                     <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                     <i class="material-icons">close</i>
+                     <input class="hide">
+                    </div>
+                </form>
+            </ul>
+            </div>
+        </div>
+    </nav>
+
+<div class="row"></div>
+    <div class="row">
+
+        <div class="col s4">
+
+            <div class="card-panel brown lighten-1">
+             <h3 class="center white-text">Agregar Facturas - Actualizar Facturas</h3>
+                <div class="row">
+                    <div class="input-field col s6">
+                    <input v-model="nombre_producto" type="text" placeholder="Ingrese Nombre del Producto">
+                    <label>Nombre Producto</label>
+                    </div>
+                    <div class="input-field col s6">
+                    <input v-model="nombre_cliente" type="text" placeholder="Ingrese Nombre del Cliente">
+                    <label>Nombre Cliente</label>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="input-field col s6">
+                <input v-model="iva" type="text" placeholder="Ingrese IVA">
+                <label>Iva</label>
+                </div>
+                <div class="input-field col s6">
+                <input v-model="cantidad" type="number" placeholder="Ingrese cantidad">
+                <label>Cantidad</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6">
+                <input v-model="subtotal" type="text" placeholder="Ingrese subtotal">
+                <label>Subtotal</label>
+                </div>
+                <div class="input-field col s6">
+                <input v-model="total" type="text" placeholder="Ingrese Total">
+                <label>Total</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                <input v-model="forma_pago" type="text" placeholder="EFECTIVO, DEBITO, CREDITO, CHEQUE">
+                <label>Forma de Pago</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="button-field col s12">
+                <button v-on:click="guardarFacturas()" class="btn-small teal accent-5">Guardar Factura</button>
+                </div>
+            </div> 
+
+            <div class="row">
+                <div class="button-field col s12">
+                <button v-on:click="actualizarFacturas()" class="btn-small teal accent-5">Actualizar Factura</button>
+                </div>
+            </div> 
+            </div>
+        </div>
+    <div class="col s8">
+
+        <div class="card-panel brown lighten-1">
+
+          <h5 class="brand-logo ">FACTURAS</h5>
+
+            <table class="responsive-table">
+                <tr>
+                <th>Nro Facturas</th>
+                <th>Productos</th>
+                <th>Cliente</th>
+                <th>IVA</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th>Total</th>
+                <th>Forma de Pago</th>
+                </tr>
+                <tr v-for="factura of lista_facturas">
+                <td>{{ factura.id_factura}}</td>
+                <td>{{ factura.nombre_producto}}</td>
+                <td>{{ factura.nombre_cliente}}</td>
+                <td>{{ factura.iva}}</td>
+                <td>{{ factura.cantidad}}</td>
+                <td>{{ factura.subtotal}}</td>
+                <td>{{ factura.total}}</td>
+                <td>{{ factura.forma_pago}}</td>
+                <td >
+                <a class="btn-floating btn-small waves-effect waves-light red " v-on:click="eliminarFacturas(factura.id_factura)"><i class="material-icons">delete</i></a>
+                <a class="btn-floating btn-small waves-effect waves-light blue" v-on:click="editarFacturas(factura.id_factura, factura.nombre_producto, factura.nombre_cliente, factura.iva, factura.cantidad, factura.subtotal, factura.total, factura.forma_pago)"><i class="material-icons">mode_edit</i></a>
+                </td>
+                </tr>
+            </table>
+        </div>
+
+</div>
+
+</div>
+
+</div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="index.js"></script>
+</body>
+
+</html>
